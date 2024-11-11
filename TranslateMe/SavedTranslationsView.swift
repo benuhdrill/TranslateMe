@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct SavedTranslationsView: View {
+    @Binding var translations: [Translation]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(translations) { translation in
+            VStack(alignment: .leading, spacing: 8) {
+                Text(translation.originalText)
+                    .font(.headline)
+                Text(translation.translatedText)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                Text(translation.date, style: .date)
+                    .font(.caption)
+            }
+            .padding(.vertical, 4)
+        }
+        .navigationTitle("Saved Translations")
     }
-}
-
-#Preview {
-    SavedTranslationsView()
 }

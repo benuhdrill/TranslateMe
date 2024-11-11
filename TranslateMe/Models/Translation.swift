@@ -1,12 +1,6 @@
-//
-//  Translation.swift
-//  TranslateMe
-//
-//  Created by Ben Gmach on 11/11/24.
-//
 import Foundation
 
-struct Translation: Identifiable, Codable {
+struct Translation: Codable, Identifiable {
     let id: UUID
     let originalText: String
     let translatedText: String
@@ -18,4 +12,4 @@ struct Translation: Identifiable, Codable {
         self.translatedText = translatedText
         self.date = Date()
     }
-}
+} 
