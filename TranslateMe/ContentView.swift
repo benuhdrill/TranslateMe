@@ -5,23 +5,93 @@ struct ContentView: View {
     @State private var translatedText = ""
     @State private var isLoading = false
     @State private var translations: [Translation] = []
+    @State private var selectedLanguage = "French"
+    
+    let languages = [
+        "French": "en|fr",
+        "Spanish": "en|es",
+        "Italian": "en|it"
+    ]
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) {
+            VStack(spacing: 25) {
                 Text("Translate Me")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .font(.system(size: 40, weight: .bold, design: .rounded))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [.blue, .blue.opacity(0.8)],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .shadow(color: .blue.opacity(0.2), radius: 10, x: 0, y: 5)
                     .padding(.top, 40)
                 
+                Menu {
+                    ForEach(languages.keys.sorted(), id: \.self) { key in
+                        Button(action: {
+                            selectedLanguage = key
+                        }) {
+                            HStack {
+                                Text(key)
+                                if selectedLanguage == key {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                        }
+                    }
+                } label: {
+                    HStack {
+                        Text("Select Language: \(selectedLanguage)")
+                            .font(.system(.body, design: .rounded))
+                        Image(systemName: "chevron.down")
+                    }
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [.blue, .blue.opacity(0.8)],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(.systemBackground))
+                            .shadow(color: .gray.opacity(0.2), radius: 8, x: 0, y: 4)
+                    )
+                }
+                .padding(.horizontal)
+                
+                HStack {
+                    Text("English")
+                        .font(.system(.subheadline, design: .rounded))
+                        .foregroundColor(.gray)
+                        .padding(.horizontal)
+                    Spacer()
+                }
+                
                 TextField("Enter text", text: $originalText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(.plain)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(.systemBackground))
+                            .shadow(color: .gray.opacity(0.2), radius: 8, x: 0, y: 4)
+                    )
                     .padding(.horizontal)
                 
                 Button(action: translateText) {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.blue)
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(
+                                LinearGradient(
+                                    colors: [.blue, .blue.opacity(0.8)],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
                             .frame(height: 50)
                         
                         if isLoading {
@@ -29,30 +99,50 @@ struct ContentView: View {
                                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         } else {
                             Text("Translate Me")
-                                .foregroundColor(.white)
+                                .font(.system(.title3, design: .rounded))
                                 .fontWeight(.semibold)
+                                .foregroundColor(.white)
                         }
                     }
                 }
                 .padding(.horizontal)
                 .disabled(originalText.isEmpty || isLoading)
                 
+                HStack {
+                    Text(selectedLanguage)
+                        .font(.system(.subheadline, design: .rounded))
+                        .foregroundColor(.gray)
+                        .padding(.horizontal)
+                    Spacer()
+                }
+                
                 TextEditor(text: .constant(translatedText))
                     .frame(height: 100)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color(UIColor.systemGray4), lineWidth: 1)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(.systemBackground))
+                            .shadow(color: .gray.opacity(0.2), radius: 8, x: 0, y: 4)
                     )
                     .padding(.horizontal)
                     .disabled(true)
                 
                 NavigationLink(destination: SavedTranslationsView(translations: $translations)) {
                     Text("View Saved Translations")
-                        .foregroundColor(.blue)
+                        .font(.system(.body, design: .rounded))
+                        .foregroundStyle(
+                            LinearGradient(
+                                colors: [.blue, .blue.opacity(0.8)],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
                 }
+                .padding(.top)
                 
                 Spacer()
             }
+            .background(Color(.systemGroupedBackground).ignoresSafeArea())
         }
     }
     
@@ -62,7 +152,7 @@ struct ContentView: View {
         
         urlComponents.queryItems = [
             URLQueryItem(name: "q", value: originalText),
-            URLQueryItem(name: "langpair", value: "en|fr")
+            URLQueryItem(name: "langpair", value: languages[selectedLanguage] ?? "en|fr")
         ]
         
         guard let url = urlComponents.url else {
@@ -104,5 +194,27 @@ struct TranslationResponse: Codable {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct SavedTranslationsView: View {
+    @Binding var translations: [Translation]
+    
+    var body: some View {
+        List(translations) { translation in
+            VStack(alignment: .leading, spacing: 8) {
+                Text(translation.originalText)
+                    .font(.system(.headline, design: .rounded))
+                Text(translation.translatedText)
+                    .font(.system(.subheadline, design: .rounded))
+                    .foregroundColor(.gray)
+                Text(translation.date, style: .date)
+                    .font(.system(.caption, design: .rounded))
+                    .foregroundColor(.blue.opacity(0.8))
+            }
+            .padding(.vertical, 4)
+        }
+        .navigationTitle("Saved Translations")
+        .navigationBarTitleDisplayMode(.large)
     }
 }

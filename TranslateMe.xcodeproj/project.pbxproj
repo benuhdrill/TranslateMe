@@ -12,7 +12,6 @@
 		B54B29842CE26F3B0027E9AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B54B29832CE26F3B0027E9AA /* Assets.xcassets */; };
 		B54B29872CE26F3B0027E9AA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B54B29862CE26F3B0027E9AA /* Preview Assets.xcassets */; };
 		B54B298E2CE29EB90027E9AA /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B298D2CE29EB90027E9AA /* Translation.swift */; };
-		B54B29922CE2A1B40027E9AA /* SavedTranslationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B29912CE2A1B40027E9AA /* SavedTranslationsView.swift */; };
 		B54B29942CE2A25D0027E9AA /* TempCodeRunnerFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B29932CE2A25D0027E9AA /* TempCodeRunnerFile.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,7 +22,6 @@
 		B54B29832CE26F3B0027E9AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B54B29862CE26F3B0027E9AA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B54B298D2CE29EB90027E9AA /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
-		B54B29912CE2A1B40027E9AA /* SavedTranslationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsView.swift; sourceTree = "<group>"; };
 		B54B29932CE2A25D0027E9AA /* TempCodeRunnerFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempCodeRunnerFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,7 +59,6 @@
 				B54B29812CE26F3A0027E9AA /* ContentView.swift */,
 				B54B298D2CE29EB90027E9AA /* Translation.swift */,
 				B54B29932CE2A25D0027E9AA /* TempCodeRunnerFile.swift */,
-				B54B29912CE2A1B40027E9AA /* SavedTranslationsView.swift */,
 				B54B29832CE26F3B0027E9AA /* Assets.xcassets */,
 				B54B29852CE26F3B0027E9AA /* Preview Content */,
 			);
@@ -149,7 +146,6 @@
 				B54B29822CE26F3A0027E9AA /* ContentView.swift in Sources */,
 				B54B29942CE2A25D0027E9AA /* TempCodeRunnerFile.swift in Sources */,
 				B54B29802CE26F3A0027E9AA /* TranslateMeApp.swift in Sources */,
-				B54B29922CE2A1B40027E9AA /* SavedTranslationsView.swift in Sources */,
 				B54B298E2CE29EB90027E9AA /* Translation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
