@@ -21,4 +21,5 @@ The following **optional** features are implemented:
 - [X] Add UI flair
 
 ## Video Walkthrough
-![translate](https://github.com/user-attachments/assets/0603706f-2ab2-4f82-93ec-558e92ef0a69)
+
+![translations](https://github.com/user-attachments/assets/4a5bb7b3-359c-48a1-9e82-e205b5bd3dec)
